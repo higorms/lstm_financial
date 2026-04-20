@@ -1,0 +1,19 @@
+{
+  "cls_accuracy": 0.5464285714285714,
+  "cls_precision": 0.6358381502890174,
+  "cls_recall": 0.3654485049833887,
+  "cls_f1_score": 0.4641350210970464,
+  "cls_auc_roc": 0.5994304698623636,
+  "cls_log_loss": 0.6900340626897813,
+  "bt_retorno_acumulado_pct": 75.75,
+  "bt_retorno_bh_pct": 84.98,
+  "bt_cagr_pct": 28.88,
+  "bt_sharpe_ratio": 0.9295,
+  "bt_sortino_ratio": 0.7696,
+  "bt_max_drawdown_pct": -11.43,
+  "bt_win_rate_pct": 60.12,
+  "bt_profit_factor": 1.7547,
+  "bt_calmar_ratio": 2.5274,
+  "bt_n_trades": 43,
+  "bt_n_days": 560
+}

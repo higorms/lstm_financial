@@ -1,0 +1,13 @@
+{
+  "retorno_acumulado_pct": 75.75,
+  "retorno_bh_pct": 84.98,
+  "cagr_pct": 28.88,
+  "sharpe_ratio": 0.9295,
+  "sortino_ratio": 0.7696,
+  "max_drawdown_pct": -11.43,
+  "win_rate_pct": 60.12,
+  "profit_factor": 1.7547,
+  "calmar_ratio": 2.5274,
+  "n_trades": 43,
+  "n_days": 560
+}

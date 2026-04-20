@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dados (grandes demais para Git)
+data/raw/*.csv
+data/processed/*.csv
+data/processed/*.npz
+data/processed/*.json
+
+# Modelos (grandes)
+models/*.keras
+models/*.pkl
+models/*.h5
+
+# MLflow
+mlruns/
+
+# TensorBoard
+logs/
+
+# Ambiente virtual
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports gerados (manter estrutura, ignorar artefatos grandes)
+reports/**/*.png
