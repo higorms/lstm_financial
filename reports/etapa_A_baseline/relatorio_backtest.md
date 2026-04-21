@@ -4,16 +4,16 @@
 
 | Métrica | Valor |
 |---|---|
-| Retorno Acumulado | 19.81% |
+| Retorno Acumulado | 41.02% |
 | Retorno Buy & Hold | 224.43% |
-| CAGR | 8.47% |
-| Sharpe Ratio | -0.0704 |
-| Sortino Ratio | -0.0636 |
-| Max Drawdown | -34.59% |
-| Win Rate | 52.08% |
-| Profit Factor | 1.1285 |
-| Calmar Ratio | 0.2450 |
-| Nº de Trades | 65 |
+| CAGR | 16.73% |
+| Sharpe Ratio | 0.2307 |
+| Sortino Ratio | 0.1617 |
+| Max Drawdown | -27.15% |
+| Win Rate | 58.43% |
+| Profit Factor | 1.3378 |
+| Calmar Ratio | 0.6160 |
+| Nº de Trades | 50 |
 | Dias no Período | 560 |
 
 ## Configuração

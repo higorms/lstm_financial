@@ -184,6 +184,9 @@ def run_optuna_optimization(
     logger.info(f"Arquitetura: {architecture}, Trials: {n_trials}")
     logger.info("=" * 60)
 
+    from src.utils.mlflow_utils import DEFAULT_TRACKING_URI
+    if not mlflow.get_tracking_uri() or "mlruns" in mlflow.get_tracking_uri():
+        mlflow.set_tracking_uri(DEFAULT_TRACKING_URI)
     mlflow.set_experiment(experiment_name)
 
     with mlflow.start_run(run_name="etapa_C_optuna") as parent_run:

@@ -179,12 +179,15 @@ def train_model(
         "use_class_weight": use_class_weight,
         "train_samples": X_train.shape[0],
         "val_samples": X_val.shape[0],
-    }
+    }    
     if tags:
         params.update({f"tag_{k}": v for k, v in tags.items()})
 
     # Treinamento
     if log_to_mlflow:
+        from src.utils.mlflow_utils import DEFAULT_TRACKING_URI
+        if not mlflow.get_tracking_uri() or "mlruns" in mlflow.get_tracking_uri():
+            mlflow.set_tracking_uri(DEFAULT_TRACKING_URI)
         mlflow.set_experiment(experiment_name)
         with mlflow.start_run(run_name=run_name) as run:
             # Log parâmetros

@@ -1,13 +1,13 @@
 {
-  "retorno_acumulado_pct": 19.81,
+  "retorno_acumulado_pct": 41.02,
   "retorno_bh_pct": 224.43,
-  "cagr_pct": 8.47,
-  "sharpe_ratio": -0.0704,
-  "sortino_ratio": -0.0636,
-  "max_drawdown_pct": -34.59,
-  "win_rate_pct": 52.08,
-  "profit_factor": 1.1285,
-  "calmar_ratio": 0.245,
-  "n_trades": 65,
+  "cagr_pct": 16.73,
+  "sharpe_ratio": 0.2307,
+  "sortino_ratio": 0.1617,
+  "max_drawdown_pct": -27.15,
+  "win_rate_pct": 58.43,
+  "profit_factor": 1.3378,
+  "calmar_ratio": 0.616,
+  "n_trades": 50,
   "n_days": 560
 }

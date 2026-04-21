@@ -23,16 +23,21 @@ def setup_mlflow(
     tracking_uri: Optional[str] = None,
 ) -> str:
     """
-    Configura MLflow tracking.
+    Configura MLflow tracking com SQLite backend.
+
+    Deve ser chamado ANTES de qualquer mlflow.start_run / set_experiment.
+    O URI padrão é 'sqlite:///mlflow.db' (relativo ao working directory).
 
     Returns
     -------
     str
         ID do experimento.
-    """    uri = tracking_uri or DEFAULT_TRACKING_URI
+    """
+    uri = tracking_uri or DEFAULT_TRACKING_URI
     mlflow.set_tracking_uri(uri)
 
     experiment = mlflow.set_experiment(experiment_name)
+    logger.info(f"MLflow tracking URI: {uri}")
     logger.info(f"MLflow experiment: '{experiment_name}' (ID: {experiment.experiment_id})")
     return experiment.experiment_id
 
