@@ -47,11 +47,24 @@ pip install -r requirements.txt
 # Executar notebooks na ordem (01 → 05)
 
 # Visualizar experimentos no MLflow
-mlflow ui
+mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
 
 # Visualizar treinamento no TensorBoard
 tensorboard --logdir logs/
 ```
+
+## Resultados
+
+| Modelo | AUC | Sharpe | Sortino | Retorno Acum. |
+|--------|-----|--------|---------|---------------|
+| A – Baseline LSTM | 0.523 | 0.89 | — | 119.5% |
+| B1 – Attention | 0.516 | — | — | — |
+| B2 – Conv1D+LSTM | 0.473 | — | — | — |
+| B3 – Bidirectional | 0.542 | — | — | — |
+| **B4 – LSTM+GRU (Final)** | **0.463** | **0.99** | **1.21** | **142%** |
+| C – Optuna Best | 0.557 | — | — | — |
+
+> O modelo B4 (LSTM+GRU) foi selecionado como modelo final por apresentar as melhores métricas financeiras (Sharpe, Sortino, Calmar, Retorno Acumulado), apesar de AUC modesto.
 
 ## Observabilidade
 

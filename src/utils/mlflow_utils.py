@@ -15,7 +15,7 @@ import mlflow
 logger = logging.getLogger(__name__)
 
 DEFAULT_EXPERIMENT = "lstm_financial_petr4"
-DEFAULT_TRACKING_URI = "mlruns"
+DEFAULT_TRACKING_URI = "sqlite:///mlflow.db"
 
 
 def setup_mlflow(
@@ -29,9 +29,8 @@ def setup_mlflow(
     -------
     str
         ID do experimento.
-    """
-    if tracking_uri:
-        mlflow.set_tracking_uri(tracking_uri)
+    """    uri = tracking_uri or DEFAULT_TRACKING_URI
+    mlflow.set_tracking_uri(uri)
 
     experiment = mlflow.set_experiment(experiment_name)
     logger.info(f"MLflow experiment: '{experiment_name}' (ID: {experiment.experiment_id})")
