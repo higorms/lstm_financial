@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Arquiteturas LSTM - Visualizacoes 3D</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0; min-height: 100vh; padding: 40px 20px;
+        }
+        h1 {
+            text-align: center; font-size: 2rem; margin-bottom: 10px;
+            background: linear-gradient(90deg, #4FC3F7, #E040FB);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: #aaa; margin-bottom: 40px; font-size: 0.95rem; }
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 24px; max-width: 1400px; margin: 0 auto;
+        }
+        .card {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 28px; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(79,195,247,0.15);
+        }
+        .card h2 { font-size: 1.25rem; margin-bottom: 8px; color: #4FC3F7; }
+        .card .desc { font-size: 0.85rem; color: #bbb; margin-bottom: 12px; font-family: monospace; }
+        .card .stats { font-size: 0.82rem; color: #999; margin-bottom: 16px; }
+        .btn {
+            display: inline-block; padding: 10px 24px; border-radius: 8px;
+            background: linear-gradient(90deg, #4FC3F7, #E040FB);
+            color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+        footer { text-align: center; margin-top: 50px; color: #666; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <h1>Arquiteturas LSTM - Projeto PETR4.SA</h1>
+    <p class="subtitle">FIAP Pos-Tech - Tech Challenge Fase 4 - Classificacao Binaria de Direcao de Preco</p>
+    <div class="grid">
+
+        <div class="card">
+            <h2>Etapa A — Baseline LSTM</h2>
+            <p class="desc">LSTM(128) → BN → Drop → LSTM(64) → BN → Drop → Dense(32, ReLU) → Sigmoid</p>
+            <p class="stats">10 camadas | 156,737 params (156,353 treinaveis)</p>
+            <a href="arquitetura_A_baseline_3d.html" target="_blank" class="btn">Abrir Visualizacao 3D Interativa</a>
+        </div>
+
+        <div class="card">
+            <h2>Etapa B1 — Attention LSTM</h2>
+            <p class="desc">LSTM → BN → LSTM(ret_seq) → BN → MultiHeadAttention → GlobalAvgPool → Dense → Sigmoid</p>
+            <p class="stats">14 camadas | 173,505 params (173,121 treinaveis)</p>
+            <a href="arquitetura_B1_attention_3d.html" target="_blank" class="btn">Abrir Visualizacao 3D Interativa</a>
+        </div>
+
+        <div class="card">
+            <h2>Etapa B2 — Conv1D + LSTM</h2>
+            <p class="desc">Conv1D → MaxPool → BN → LSTM → BN → LSTM → BN → Dense → Sigmoid</p>
+            <p class="stats">13 camadas | 165,825 params (165,313 treinaveis)</p>
+            <a href="arquitetura_B2_conv1d_lstm_3d.html" target="_blank" class="btn">Abrir Visualizacao 3D Interativa</a>
+        </div>
+
+        <div class="card">
+            <h2>Etapa B3 — Bidirectional LSTM</h2>
+            <p class="desc">BiLSTM → BN → Drop → BiLSTM → BN → Drop → Dense(ReLU) → Sigmoid</p>
+            <p class="stats">10 camadas | 378,945 params (378,177 treinaveis)</p>
+            <a href="arquitetura_B3_bidirectional_3d.html" target="_blank" class="btn">Abrir Visualizacao 3D Interativa</a>
+        </div>
+
+        <div class="card">
+            <h2>Etapa B4 — LSTM + GRU Híbrido</h2>
+            <p class="desc">LSTM(128) → BN → Drop → GRU(64) → BN → Drop → Dense(32, ReLU) → Sigmoid</p>
+            <p class="stats">10 camadas | 144,577 params (144,193 treinaveis)</p>
+            <a href="arquitetura_B4_lstm_gru_3d.html" target="_blank" class="btn">Abrir Visualizacao 3D Interativa</a>
+        </div>
+
+        <div class="card">
+            <h2>Etapa D — Modelo Final (LSTM+GRU retreinado)</h2>
+            <p class="desc">Modelo B4 retreinado como modelo final selecionado</p>
+            <p class="stats">10 camadas | 480,065 params (479,361 treinaveis)</p>
+            <a href="arquitetura_D_modelo_final_3d.html" target="_blank" class="btn">Abrir Visualizacao 3D Interativa</a>
+        </div>
+
+    </div>
+    <footer>
+        Gerado automaticamente - Visualizacoes interativas com Plotly 3D<br>
+        Passe o mouse sobre cada bloco para ver detalhes (unidades, ativacao, parametros, regularizacao)
+    </footer>
+</body>
+</html>
