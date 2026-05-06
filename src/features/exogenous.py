@@ -74,15 +74,14 @@ def add_volume_features(df: pd.DataFrame) -> pd.DataFrame:
     price_change = df["Close"].pct_change()
     df["volume_price_trend"] = price_change.rolling(window=21).corr(
         df["Volume"].pct_change()
-    )
-
-    # Accumulation/Distribution
+    )    # Accumulation/Distribution
     ad = ta.volume.AccDistIndexIndicator(
         high=df["High"], low=df["Low"], close=df["Close"], volume=df["Volume"]
     )
-    ad_raw = ad.acc_dist_index()    # Normalizar: variação percentual do AD (evita divisão por valores instáveis)
-    df["accumulation_distribution"] = ad_raw.pct_change(periods=5).replace(
-        [np.inf, -np.inf], np.nan
-    )
+    ad_raw = ad.acc_dist_index()
+    # Normalizar via diferença rolling ao invés de pct_change (evita divisão por zero)
+    ad_diff = ad_raw.diff(periods=5)
+    ad_std = ad_raw.rolling(window=20).std().replace(0, np.nan)
+    df["accumulation_distribution"] = ad_diff / ad_std
 
     return df

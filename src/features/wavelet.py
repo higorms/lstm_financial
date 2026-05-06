@@ -20,8 +20,9 @@ logger = logging.getLogger(__name__)
 # Configurações conforme planejamento
 WAVELET = "db4"
 ROLLING_WINDOW = 60  # Janela para decomposição rolling
-# Nível máximo de decomposição será calculado dinamicamente para evitar boundary effects
-DECOMPOSITION_LEVEL = pywt.dwt_max_level(ROLLING_WINDOW, pywt.Wavelet(WAVELET).dec_len)  # tipicamente 3 para db4/60
+# Forçar nível 4 para manter compatibilidade com as features planejadas (detail_1 a detail_4)
+# PyWavelets emite warning de boundary effects mas gera os coeficientes corretamente
+DECOMPOSITION_LEVEL = 4
 
 
 def _dwt_decompose(signal: np.ndarray, wavelet: str = WAVELET,

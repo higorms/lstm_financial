@@ -4,19 +4,19 @@
 
 | Métrica | Valor |
 |---|---|
-| Retorno Acumulado | 41.02% |
-| Retorno Buy & Hold | 224.43% |
-| CAGR | 16.73% |
-| Sharpe Ratio | 0.2307 |
-| Sortino Ratio | 0.1617 |
-| Max Drawdown | -27.15% |
-| Win Rate | 58.43% |
-| Profit Factor | 1.3378 |
-| Calmar Ratio | 0.6160 |
-| Nº de Trades | 50 |
-| Dias no Período | 560 |
+| Retorno Acumulado | 97.94% |
+| Retorno Buy & Hold | 216.00% |
+| CAGR | 35.90% |
+| Sharpe Ratio | 0.6779 |
+| Sortino Ratio | 0.8885 |
+| Max Drawdown | -39.10% |
+| Win Rate | 54.31% |
+| Profit Factor | 1.2055 |
+| Calmar Ratio | 0.9179 |
+| Nº de Trades | 18 |
+| Dias no Período | 561 |
 
 ## Configuração
 - Capital Inicial: R$ 100,000.00
 - Custo por Transação: 0.030%
-- Período: 2021-05-13 a 2023-09-18
+- Período: 2021-05-21 a 2023-09-27
