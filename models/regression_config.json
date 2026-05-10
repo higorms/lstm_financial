@@ -1,0 +1,30 @@
+{
+  "architecture": "conv1d_lstm",
+  "window_size": 60,
+  "n_features": 75,
+  "best_params": {
+    "window_size": 60,
+    "lstm1_units": 64,
+    "lstm2_units": 32,
+    "dense_units": 64,
+    "dropout_lstm": 0.11714914803383854,
+    "dropout_dense": 0.24988006412068614,
+    "learning_rate": 0.009029721155985597,
+    "batch_size": 64,
+    "use_batchnorm": false,
+    "l2_reg": 1.07642085430099e-05
+  },
+  "test_metrics": {
+    "MAE": 0.3714156872299074,
+    "RMSE": 0.5313204525134742,
+    "MAPE": 1.1581433427462517,
+    "R2": 0.9868632037383344,
+    "MAE_ret": 0.01157202205641558,
+    "RMSE_ret": 0.016080373625349236,
+    "R2_ret": 0.0005134889629518913,
+    "Direction_Acc": 52.76292335115864
+  },
+  "task": "regression",
+  "target": "return_t_to_t+1",
+  "target_description": "Retorno percentual (Close_t+1/Close_t - 1). Reconstruir preco: Close_t * (1 + pred_return)"
+}
