@@ -1,0 +1,58 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lstm_regression_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - inference_logs:/app/logs
+    environment:
+      - TZ=UTC
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_PLUGINS_PREINSTALL_SYNC=yesoreyeram-infinity-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - inference_logs:/var/lib/grafana/csv:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  csv_server:
+    image: nginx:1.27-alpine
+    container_name: csv_server
+    ports:
+      - "8081:80"
+    volumes:
+      - inference_logs:/usr/share/nginx/html:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./notebooks/mlflow.db:/mlflow.db
+      - ./notebooks/mlruns:/mlruns
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:////mlflow.db
+      --default-artifact-root /mlruns
+      --host 0.0.0.0
+      --port 5000
+    restart: unless-stopped
+
+volumes:
+  grafana_data:
+  inference_logs:

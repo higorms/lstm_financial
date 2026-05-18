@@ -1,0 +1,14 @@
+.git/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+.vscode/
+logs/
+logs_reg/
+mlruns/
+notebooks/
+reports/
+data/raw/
+models_reg/

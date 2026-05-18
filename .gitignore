@@ -26,6 +26,7 @@ mlruns/
 
 # TensorBoard
 logs/
+logs_reg/
 
 # Ambiente virtual
 venv/
@@ -42,3 +43,4 @@ Thumbs.db
 
 # Reports gerados (manter estrutura, ignorar artefatos grandes)
 reports/**/*.png
+
