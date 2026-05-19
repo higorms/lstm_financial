@@ -44,6 +44,7 @@ services:
       - "5000:5000"
     environment:
       - MLFLOW_SERVER_ALLOWED_HOSTS=*
+      - MLFLOW_SERVER_DISABLE_SECURITY_MIDDLEWARE=true
     volumes:
       - ./notebooks/mlflow.db:/mlflow.db
       - ./notebooks/mlruns:/mlruns
