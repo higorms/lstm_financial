@@ -122,11 +122,41 @@ async def log_request_metrics(request: Request, call_next):
 
 @app.get("/health")
 def health() -> dict:
+    """Verifica se a API esta saudavel.
+
+    Returns:
+        dict: Status simples indicando que a API esta operante.
+
+    Example:
+        >>> GET /health
+        {"status": "ok"}
+    """
     return {"status": "ok"}
 
 
 @app.get("/predict/regression", response_model=RegressionPrediction)
 def predict_regression(date: Date) -> RegressionPrediction:
+    """Gera previsao de retorno e fechamento para uma data alvo.
+
+    Args:
+        date (Date): Data para a qual a previsao deve ser calculada.
+
+    Returns:
+        RegressionPrediction: Predicao contendo data prevista, retorno e preco.
+
+    Raises:
+        HTTPException: 500 quando os artefatos nao estao carregados.
+        HTTPException: 404 quando a data nao existe no dataset.
+        HTTPException: 400 quando a data e invalida para a inferencia.
+
+    Example:
+        >>> GET /predict/regression?date=2024-01-15
+        {
+            "predicted_date": "2024-01-15",
+            "predicted_return": 0.0123,
+            "predicted_close": 131.45
+        }
+    """
     if _artifacts is None:
         raise HTTPException(status_code=500, detail="Artifacts not loaded")
 
