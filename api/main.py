@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Query, Request
 from pydantic import BaseModel
 
 from src.model.regression_inference import load_regression_artifacts, predict_next_return
@@ -120,43 +120,56 @@ async def log_request_metrics(request: Request, call_next):
         except Exception:
             logger.exception("Failed to append request metrics")
 
-@app.get("/health")
+@app.get(
+    "/health",
+    summary="Health check",
+    description="Verifica se a API esta disponivel.",
+    response_description="Status atual do servico.",
+    tags=["Status"],
+    responses={
+        200: {
+            "description": "API disponivel",
+            "content": {"application/json": {"example": {"status": "ok"}}},
+        }
+    },
+)
 def health() -> dict:
-    """Verifica se a API esta saudavel.
-
-    Returns:
-        dict: Status simples indicando que a API esta operante.
-
-    Example:
-        >>> GET /health
-        {"status": "ok"}
-    """
     return {"status": "ok"}
 
 
-@app.get("/predict/regression", response_model=RegressionPrediction)
-def predict_regression(date: Date) -> RegressionPrediction:
-    """Gera previsao de retorno e fechamento para uma data alvo.
-
-    Args:
-        date (Date): Data para a qual a previsao deve ser calculada.
-
-    Returns:
-        RegressionPrediction: Predicao contendo data prevista, retorno e preco.
-
-    Raises:
-        HTTPException: 500 quando os artefatos nao estao carregados.
-        HTTPException: 404 quando a data nao existe no dataset.
-        HTTPException: 400 quando a data e invalida para a inferencia.
-
-    Example:
-        >>> GET /predict/regression?date=2024-01-15
-        {
-            "predicted_date": "2024-01-15",
-            "predicted_return": 0.0123,
-            "predicted_close": 131.45
-        }
-    """
+@app.get(
+    "/predict/regression",
+    response_model=RegressionPrediction,
+    summary="Previsao de retorno",
+    description=(
+        "Gera previsao de retorno e fechamento para a data informada. "
+        "Usa o modelo LSTM de regressao treinado com os dados historicos."
+    ),
+    response_description="Predicao com retorno e preco de fechamento.",
+    tags=["Regression"],
+    responses={
+        200: {
+            "description": "Predicao gerada",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "predicted_date": "2024-01-15",
+                        "predicted_return": 0.0123,
+                        "predicted_close": 131.45,
+                    }
+                }
+            },
+        },
+        400: {"description": "Data invalida para inferencia"},
+        404: {"description": "Data nao encontrada no dataset"},
+        500: {"description": "Artefatos nao carregados"},
+    },
+)
+def predict_regression(
+    date: Date = Query(
+        ..., description="Data alvo no formato YYYY-MM-DD.", example="2024-01-15"
+    )
+) -> RegressionPrediction:
     if _artifacts is None:
         raise HTTPException(status_code=500, detail="Artifacts not loaded")
 
